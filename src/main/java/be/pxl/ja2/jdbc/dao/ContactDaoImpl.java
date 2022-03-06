@@ -14,9 +14,9 @@ public class ContactDaoImpl implements ContactDao {
 	private static final String UPDATE = "UPDATE contacts SET name=?, phone=?, email=? WHERE id = ?";
 	private static final String INSERT = "INSERT INTO contacts (name, phone, email) VALUES (?, ?, ?)";
 	private static final String DELETE = "DELETE FROM contacts WHERE id = ?";
-	private String url;
-	private String user;
-	private String password;
+	private final String url;
+	private final String user;
+	private final String password;
 
 	public ContactDaoImpl(String url, String user, String password) {
 		this.url = url;
@@ -48,7 +48,8 @@ public class ContactDaoImpl implements ContactDao {
 	}
 
 	public Contact getContactById(long id) {
-		try (Connection connection = getConnection(); PreparedStatement stmt = connection.prepareStatement(SELECT_BY_ID)) {
+		try (Connection connection = getConnection();
+		     PreparedStatement stmt = connection.prepareStatement(SELECT_BY_ID)) {
 			stmt.setLong(1, id);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
