@@ -12,9 +12,9 @@ import java.sql.Statement;
 public class ReadUpdateThread extends Thread {
 
 	private static final Logger LOGGER = LogManager.getLogger(ReadUpdateThread.class);
-	private Connection connection;
-	private String newPhone;
-	private boolean commit;
+	private final Connection connection;
+	private final String newPhone;
+	private final boolean commit;
 
 	ReadUpdateThread(int transactionLevel, String newPhone, boolean commit) throws SQLException {
 		this.connection = createConnection(transactionLevel);
@@ -69,8 +69,6 @@ public class ReadUpdateThread extends Thread {
 			thread1.start();
 			Thread.sleep(3000);
 			thread2.start();
-			thread1.join();
-			thread2.join();
 		} catch (Exception e) {
 			LOGGER.fatal("Something went wrong.", e);
 		}
