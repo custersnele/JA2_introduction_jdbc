@@ -227,7 +227,7 @@ public class MusicDatasource {
 		}
 	}
 
-	public List<SongArtist> querySongInfoWithPreparedStatment(String title) {
+	public List<SongArtist> querySongInfoWithPreparedStatement(String title) {
 
 		try {
 			querySongInfo.setString(1, title);
