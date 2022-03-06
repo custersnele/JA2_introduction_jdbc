@@ -19,18 +19,19 @@ public class InsertUpdateDelete {
 			statement.execute("INSERT INTO contacts (name, phone, email) VALUES('Jane', 4829484, 'jane@somewhere.com')");
 			statement.execute("INSERT INTO contacts (name, phone, email) VALUES('Fido', 9038, 'dog@email.com')");
 
-			statement.execute("SELECT * FROM contacts");
-			ResultSet results = statement.getResultSet();
+			ResultSet results = statement.executeQuery("SELECT * FROM contacts");
+
 			int numberOfRows = 0;
 			while (results.next()) {
 				numberOfRows++;
-				System.out.println(results.getString("name") + " " +
+				System.out.println(results.getString(2) + " " +
 						results.getInt("phone") + " " +
 						results.getString("email"));
 			}
 			LOGGER.info("Number of rows in table: " + numberOfRows);
 
-			statement.executeUpdate("UPDATE contacts set phone='486666' WHERE name = 'Jane'");
+			int i = statement.executeUpdate("UPDATE contacts set phone='486666' WHERE name = 'Jane'");
+			LOGGER.info("Rows updated: " + i);
 
 			statement.executeUpdate("DELETE FROM contacts WHERE email = 'dog@email.com'");
 		} catch (SQLException e) {
