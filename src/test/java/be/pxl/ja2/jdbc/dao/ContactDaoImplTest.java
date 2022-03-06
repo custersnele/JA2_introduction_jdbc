@@ -38,7 +38,6 @@ public class ContactDaoImplTest {
 	public void testCreateContact() {
 		Contact newContact = contactDao.createContact(new Contact(NAME, PHONE, EMAIL));
 		assertNotNull(newContact);
-		assertNotNull(newContact.getId());
 		assertEquals(NAME, newContact.getName());
 		assertEquals(PHONE, newContact.getPhone());
 		assertEquals(EMAIL, newContact.getEmail());
@@ -61,6 +60,7 @@ public class ContactDaoImplTest {
 
 
 	private void createDatabase() throws SQLException {
+
 		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 		     Statement statement = connection.createStatement()) {
 			statement.execute("CREATE TABLE IF NOT EXISTS contacts (id INTEGER NOT NULL AUTO_INCREMENT, name TEXT, phone INTEGER, email TEXT, PRIMARY KEY (id))");
